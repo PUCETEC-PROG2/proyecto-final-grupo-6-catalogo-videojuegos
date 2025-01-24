@@ -50,16 +50,14 @@ class Migration(migrations.Migration):
                 pares INTEGER := 0;
                 digito INTEGER;
             BEGIN
-                cedula_text := cedula;
-                
-                FOR i IN 1..LENGTH(cedula_text) LOOP
-                    IF i % 2 = 0 THEN  
+                cedula_text := CAST (cedula as TEXT);
+                pares :=0;
+                FOR i IN 1..9 LOOP
+                    if i % 2 = 0 THEN
                         digito := CAST(SUBSTRING(cedula_text FROM i FOR 1) AS INTEGER);
-                        
-                        pares := pares + digito;
+                        pares=pares+digito;
                     END IF;
                 END LOOP;
-                
                 RETURN pares;
             END;
             $$;
@@ -75,7 +73,7 @@ class Migration(migrations.Migration):
                 temporal INTEGER;
             BEGIN
                 pares := obtener_par(NEW.cedula);  
-                impares := obtener_impar(NEW.cedula);  
+                impares := obtener_par_cedula(NEW.cedula);  
 
                 temporal := pares + impares;
 
