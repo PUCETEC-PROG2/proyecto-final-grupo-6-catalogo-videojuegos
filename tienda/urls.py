@@ -7,5 +7,6 @@ app_name = 'tienda'
 urlpatterns = [
     path("", views.index, name="index"),
     path("Producto/", views.Producto, name="Producto"),
+    path("login/", views.CustomLoginView.as_view(), name="login"),
 
 ]

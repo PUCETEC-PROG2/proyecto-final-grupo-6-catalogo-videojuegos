@@ -4,9 +4,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{% block title %}{% endblock title%}</title>
+    <title>{% block title %}{% endblock title %}</title>
     <link href="{% static "bootstrap.min.css" %}" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" integrity="sha384-k6RqeWeci5ZR/Lv4MR0sA0FfDOM6g0g5z5e5e5e5e5e5e5e5e5e5e5e5e5e5e5e" crossorigin="anonymous">
     <style>
         .dropdown {
             position: relative;
@@ -49,7 +51,6 @@
             z-index: 1; 
         }
 
-
         .dropdown-content a {
             color: black; 
             padding: 12px 16px; 
@@ -57,14 +58,29 @@
             display: block; 
         }
 
-
         .dropdown-content a:hover {
             background-color: #23849c;
         }
 
-
         .dropdown:hover .dropdown-content {
             display: block; 
+        }
+        .form-control {
+            transition: background-color 0.3s, color 0.3s; 
+        }
+    
+        .form-control:hover {
+            background-color:rgb(177, 212, 212); 
+            color: #d1b9b9; 
+        }
+    
+        .btn-outline-success {
+            transition: background-color 0.3s, color 0.3s; 
+        }
+    
+        .btn-outline-success:hover {
+            background-color:rgb(212, 27, 14); 
+            color: white; 
         }
         
     </style>
@@ -73,13 +89,12 @@
     <div class="background"></div>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="container-fluid">
-            
             <div class="top-rectangle">
-                <a class="navbar-brand" href="/" style="color:white">
-                    <img src="{% static "logo.jpg" %}" alt="Logo" width="110" height="110" >
+                <br>
+                <img src="{% static "logo.jpg" %}" alt="Logo" width="110" height="110">
+                <a class="navbar-brand" href="/" style="color:white">                
                     Inicio
                 </a>
-
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
@@ -87,43 +102,38 @@
                 <div class="collapse navbar-collapse" id="navbarNav">
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                         <li class="nav-item dropdown">
-                            <a class="nav-link active" aria-current="page" href="#" style="color:white">Categorías</a>
+                            <a class="nav-link active" aria-current="page" href="#" style="color:white">Categorías   ▼   </a>
                             <div class="dropdown-content">
                                 <a href="#juegos">Juegos</a>
-                                <a href="#consolas">Consolas</a>
+                                <a href ="#consolas">Consolas</a>
                             </div>
                         </li>
+                        {% if user.is_authenticated %}
                         <li class="nav-item">
                             <a class="nav-link" href="#" style="color:white">Clientes</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="#" style="color:white">Compras</a>
                         </li>
+                        {% endif %}
                         <li class="nav-item">
                             <a class="nav-link" href="#" style="color:white">Acerca de</a>
+                        </li>              
+                        {% if user.is_authenticated %}
+                        <li class="nav-item">
+                            <a class="nav-link text-white" href="{% url "logout" %}">
+                                <i class="fa-solid fa-right-from-bracket"></i>
+                            </a>
                         </li>
+                        {% else %}
+                        <li class="nav-item">
+                            <a class="nav-link text-white" href="{% url "tienda:login" %}">
+                                <i class="fa-solid fa-right-to-bracket"></i>
+                            </a>
+                        </li>
+                        {% endif %}
                     </ul>
 
-                    <style>
-                        .form-control {
-                            transition: background-color 0.3s, color 0.3s; 
-                        }
-                    
-                        .form-control:hover {
-                            background-color:rgb(177, 212, 212); 
-                            color: #d1b9b9; 
-                        }
-                    
-                        .btn-outline-success {
-                            transition: background-color 0.3s, color 0.3s; 
-                        }
-                    
-                        .btn-outline-success:hover {
-                            background-color:rgb(212, 27, 14); 
-                            color: white; 
-                        }
-                    </style>
-                    
                     <form class="d-flex mover-izquierda" method="GET" action="#">
                         <input class="form-control me-2" type="search" placeholder="Buscar" aria-label="Search" name="q" style="color:red">
                         <button class="btn btn-outline-success" type="submit" style="color:white">Búsqueda</button>

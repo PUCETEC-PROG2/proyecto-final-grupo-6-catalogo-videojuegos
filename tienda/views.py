@@ -17,3 +17,6 @@ def Products(request):
     Producto = Producto.objects.all()
     template = loader.get_template('display_products.html')
     return HttpResponse(template.render({'Producto': Producto}, request))
+
+class CustomLoginView(LoginView):
+    template_name = "login_form.html"

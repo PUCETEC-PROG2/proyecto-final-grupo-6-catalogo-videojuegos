@@ -18,7 +18,7 @@
     padding: 1rem; /* Ajusta el padding si es necesario */
 }
 </style>
-
+<h2 class="p-2" style="color:white">Lo mas Destacado</h2>
 <div class = "row">
     {% for producto in productos %}
     <div class="col-sm-4">
@@ -29,7 +29,7 @@
           <h5 class="card-title">{{ producto | capfirst }}</h5>
           <p class="card-text">Precio: ${{producto.precio}}</p>
           <p class="card-text">/////////////////////////////////////////////////////////////////</p>
-          <p class="card-text">Descripción: {{producto.descripcion}}</p>
+          <p class="card-text"><strong>Descripción:</strong> {{producto.descripcion}}</p>
         </div>
       </div>
 
