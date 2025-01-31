@@ -2,7 +2,34 @@
 {% block title %}Página inicial{% endblock title %}
 {% block content %}
 
+<div class = "row">
+    {% for producto in productos %}
+    <div class="col-sm-4">
+      <br>
+      <div class="card" style="width: 100%;">
+        <img class="card-img-top" src="{{producto.imagenes.url}}" alt="Card image cap">
+        <div class="card-body">
+          <h5 class="card-title">{{ producto | capfirst }}</h5>
+          <p class="card-text">Precio {{producto.precio}}</p>
+          <a href="producto/{{producto.pk}}" class="btn btn-primary">
+            <i class="fa-solid fa-eye"></i>
+          </a>
+          {% if user.is_authenticated %}
+            <a href="edit_pokemon/{{pokemon.pk}}" class="btn btn-primary">
+              <i class="fa-solid fa-pencil"></i>
+            </a>
+            <a href="delet_pokemon/{{pokemon.pk}}" class="btn btn-danger">
+              <i class="fa-solid fa-trash"></i>
+            </a>
+          {% endif %}
+        </div>
+      </div>
+
+    </div>
+    {% endfor %}
+  </div>
 
 {% endblock content %}
+producto/{{producto.pk}}
 
-<p class="p-2">Hola, este es tu lista de pokemons</p>
+class="btn btn-primary">
