@@ -79,12 +79,12 @@ class Producto(models.Model):
     ]
     genero_videojuegos = models.CharField(
         max_length=50,
-        choices=JUEGOS_CHOICES,
+        choices=JUEGOS_CHOICES,null=True, blank=True,
         verbose_name="Genero videojuegos"
     )
     tipo_consola = models.CharField(
         max_length=50,
-        choices=CONSOLAS_CHOICES,
+        choices=CONSOLAS_CHOICES, null=True, blank=True,
         verbose_name="Consolas de videojuegos"
     )
     imagenes = models.ImageField(upload_to="productos_images")

@@ -1,6 +1,23 @@
 {% extends "base.html" %}
 {% block title %}Página inicial{% endblock title %}
 {% block content %}
+<style>
+  .card {
+    background-color:rgb(135, 171, 206); 
+    border: 0px solid #dee2e6; 
+    border-radius: 0.25rem; 
+}
+
+.card-img-top {
+    width: 100%; 
+    height: 200px; 
+    object-fit: cover; 
+}
+
+.card-body {
+    padding: 1rem; /* Ajusta el padding si es necesario */
+}
+</style>
 
 <div class = "row">
     {% for producto in productos %}
@@ -8,20 +25,11 @@
       <br>
       <div class="card" style="width: 100%;">
         <img class="card-img-top" src="{{producto.imagenes.url}}" alt="Card image cap">
-        <div class="card-body">
+        <div class="card-body" >
           <h5 class="card-title">{{ producto | capfirst }}</h5>
-          <p class="card-text">Precio {{producto.precio}}</p>
-          <a href="producto/{{producto.pk}}" class="btn btn-primary">
-            <i class="fa-solid fa-eye"></i>
-          </a>
-          {% if user.is_authenticated %}
-            <a href="edit_pokemon/{{pokemon.pk}}" class="btn btn-primary">
-              <i class="fa-solid fa-pencil"></i>
-            </a>
-            <a href="delet_pokemon/{{pokemon.pk}}" class="btn btn-danger">
-              <i class="fa-solid fa-trash"></i>
-            </a>
-          {% endif %}
+          <p class="card-text">Precio: ${{producto.precio}}</p>
+          <p class="card-text">/////////////////////////////////////////////////////////////////</p>
+          <p class="card-text">Descripción: {{producto.descripcion}}</p>
         </div>
       </div>
 
@@ -30,6 +38,3 @@
   </div>
 
 {% endblock content %}
-producto/{{producto.pk}}
-
-class="btn btn-primary">
