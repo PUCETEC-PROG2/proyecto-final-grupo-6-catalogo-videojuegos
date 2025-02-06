@@ -1,0 +1,114 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<style>
+    body {
+        background-color: rgb(35, 122, 209);  
+        color: white;  
+    }
+
+    .container {
+        background-color: rgb(8, 58, 107);  
+        padding: 20px;
+        border-radius: 8px;
+    }
+
+    table {
+        width: 100%;
+        margin: 20px 0;
+        border-collapse: collapse;
+        color: white;
+    }
+    
+    table, th, td {
+        border: 1px solid #ddd;
+    }
+
+    th, td {
+        padding: 12px;
+        text-align: left;
+    }
+
+    th {
+        background-color: rgb(7, 104, 84);  
+        color: white;
+    }
+
+
+    tbody tr:nth-child(odd) {
+        background-color: rgb(5, 110, 89);
+    }
+
+    tbody tr:nth-child(even) {
+        background-color: rgb(17, 97, 50);
+    }
+
+    td[colspan="3"] {
+        text-align: center;
+        color: #f39c12;  
+    }
+    .add-icon {
+        font-size: 30px;
+        color: black;
+        background-color: #39FF14;
+        border-radius: 50%;  /* Círculo */
+        padding: 10px;
+        position: absolute;
+        right: 140px; 
+        top: 147px;
+        cursor: pointer;
+    }
+
+    .add-icon i {
+        margin-top: 8px;
+    }
+</style>
+{% if messages %}
+    <div class="container mt-3">
+        {% for message in messages %}
+            <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+                {{ message }}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        {% endfor %}
+    </div>
+{% endif %}
+<div class="container mt-4">
+    
+    <h2>Lista de Clientes</h2>
+    <a href="{% url "tienda:add_cliente" %}" class="add-icon">
+        <i class="fa fa-plus"></i>
+    </a>
+    <table class="table" style="color:white">
+        <thead>
+            <tr>
+                <th>Nombre</th>
+                <th>Correo</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for cliente in clientes %}
+                <tr>
+                    <td>{{ cliente.nombre }}</td>
+                    <td>{{ cliente.correo }}</td>
+                    <td>
+                        <a href="{% url 'tienda:edit_cliente' cliente.id_cliente %}" class="btn btn-primary">
+                            <i class="fa-solid fa-pencil"></i>
+                        </a>
+                        <a href="{% url 'tienda:delet_cliente' cliente.id_cliente %}" class="btn btn-danger" 
+                            onclick="return confirm('¿Estás seguro de que deseas eliminar a {{ cliente.nombre }}?')">
+                            <i class="fa-solid fa-trash"></i>
+                        </a>
+                    </td>  
+                </tr>
+            {% empty %}
+                <tr>
+                    <td colspan="3">No hay clientes registrados</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+{% endblock %}

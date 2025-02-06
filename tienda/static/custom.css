@@ -2,3 +2,7 @@
     width: 350px;
     height: auto;
 }
+
+.btn-outline-success {
+    border-color: #7a0d0a; /* Cambiar el color del borde */
+}

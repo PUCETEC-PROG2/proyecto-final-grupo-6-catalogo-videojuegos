@@ -3,7 +3,7 @@
 {% block content %}
 <style>
   .card {
-    background-color:rgb(135, 171, 206); 
+    background-color:rgb(14, 52, 90); 
     border: 0px solid #dee2e6; 
     border-radius: 0.25rem; 
 }
@@ -15,7 +15,7 @@
 }
 
 .card-body {
-    padding: 1rem; /* Ajusta el padding si es necesario */
+    padding: 1rem; 
 }
 </style>
 <h2 class="p-2" style="color:white">Lo mas Destacado</h2>
@@ -25,10 +25,10 @@
       <br>
       <div class="card" style="width: 100%;">
         <img class="card-img-top" src="{{producto.imagenes.url}}" alt="Card image cap">
-        <div class="card-body" >
+        <div class="card-body" style="color:white" >
           <h5 class="card-title">{{ producto | capfirst }}</h5>
           <p class="card-text">Precio: ${{producto.precio}}</p>
-          <p class="card-text">/////////////////////////////////////////////////////////////////</p>
+          <p class="card-text">////////////////////////////////////////////////////////////////</p>
           <p class="card-text"><strong>Descripción:</strong> {{producto.descripcion}}</p>
         </div>
       </div>

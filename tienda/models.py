@@ -114,7 +114,7 @@ class Compras(models.Model):
     id_compra = models.AutoField(primary_key=True)
     productos = models.ManyToManyField(Producto, related_name='Compras')
     comprador = models.ForeignKey(Cliente, on_delete=models.CASCADE, related_name='Comprador')
-    fecha_transaccion = models.DateField(auto_now_add=True)
+    fecha_transaccion = models.DateField()
     precio_final = models.DecimalField(max_digits=10, decimal_places=2, blank=True, null=True)
 
     class Meta:

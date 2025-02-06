@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<style>
+    .card {
+      background-color:rgb(14, 52, 90); 
+      border: 0px solid #dee2e6; 
+      border-radius: 0.25rem; 
+  }
+</style>
+<br>
+<h2 style="color:white; text-align: center;">Resultados para "{{ query }}"</h2>
+
+{% if productos %}
+    <div class="container mt-4">
+        <div class="row">
+            {% for producto in productos %}
+            <div class="col-md-4">
+                <div class="card mb-4 shadow-sm">
+                    <img src="{{ producto.imagenes.url }}" class="card-img-top" alt="{{ producto.nombre_producto }}" style="height: 200px; object-fit: cover;">
+                    <div class="card-body" style="color:white">
+                        <h5 class="card-title">{{ producto.nombre_producto }}</h5>
+                        <p class="card-text"><strong>Precio: ${{ producto.precio }}</strong></p>
+                        <p class="card-text">{{ producto.descripcion|truncatechars:100 }}</p>
+
+                       
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+{% else %}
+<br>
+<br>
+    <h2 style="color:white; text-align: center;">No se encontraron productos.</h2>
+{% endif %}
+{% endblock %}

@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+{% block title %}Formulario de Clientes{% endblock title %}
+{% block content %}
+<style>
+    /* Estilos específicos para el formulario de cliente */
+    .clientes-form .campo {
+        color: black;  /* El texto dentro de los campos de entrada será negro */
+    }
+
+    /* Estilo para las etiquetas de los campos (por ejemplo, Nombre, Correo) */
+    .clientes-form label {
+        color: white;  /* Las etiquetas tendrán texto blanco */
+    }
+
+    .clientes-form .campo::placeholder {
+        color: black;  /* El texto del placeholder será negro */
+    }
+
+    .clientes-form .form-control {
+        background-color: #f8f9fa;  /* Fondo claro para los campos */
+        border: 1px solid #ccc;     /* Borde delgado y suave */
+    }
+
+    .clientes-form .btn-primary {
+        background-color: #007bff;
+        border-color: #007bff;
+    }
+</style>
+
+<div class="container mt-4">
+    <h2 class="text-white">Formulario de Cliente</h2>
+    <form method="post" enctype="multipart/form-data" class="clientes-form">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="btn btn-primary">Guardar</button>
+        <a href="{% url "tienda:clientes" %}" class="btn btn-secondary">Regresar</a>
+    </form>
+</div>
+
+{% endblock content %}
