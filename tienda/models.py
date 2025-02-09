@@ -130,3 +130,8 @@ class Compras(models.Model):
         self.precio_final = total
         self.save()
         return total
+
+class DetalleCompra(models.Model):
+    compra = models.ForeignKey(Compras, on_delete=models.CASCADE)
+    producto = models.ForeignKey(Producto, on_delete=models.CASCADE)
+    cantidad = models.PositiveIntegerField(default=1)

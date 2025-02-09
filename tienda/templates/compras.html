@@ -8,7 +8,7 @@
     }
 
     .container {
-        background-color: rgb(8, 58, 107);  
+        background-color: rgb(8, 58, 107, 0.60);  
         padding: 20px;
         border-radius: 8px;
     }
@@ -30,16 +30,16 @@
     }
 
     th {
-        background-color: rgb(7, 104, 84);  
+        background-color: rgb(7, 104, 84, 0.60);  
         color: white;
     }
 
     tbody tr:nth-child(odd) {
-        background-color: rgb(5, 110, 89);
+        background-color: rgb(5, 110, 89, 0.60);
     }
 
     tbody tr:nth-child(even) {
-        background-color: rgb(17, 97, 50);
+        background-color: rgb(17, 97, 50, 0.60);
     }
 
     td[colspan="3"] {
@@ -48,9 +48,9 @@
     }
 
     .view-icon {
-        font-size: 30px;
+        font-size: 20px;
         color: white;
-        background-color: #FF5733;  /* Color para el ícono */
+        background-color:rgba(182, 13, 13, 0.9);   
         border-radius: 50%;  /* Círculo */
         padding: 10px;
         cursor: pointer;
@@ -77,20 +77,9 @@
     }
 </style>
 
-{% if messages %}
-    <div class="container mt-3">
-        {% for message in messages %}
-            <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
-                {{ message }}
-                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-            </div>
-        {% endfor %}
-    </div>
-{% endif %}
-
 <div class="container mt-4">
     <h2>Lista de Compras</h2>
-    <!-- Ícono para añadir nuevas compras, solo visible para admins o en su caso si tienes esa funcionalidad -->
+    
     <a href="{% url 'tienda:add_compra' %}" class="add-icon">
         <i class="fa fa-plus"></i>
     </a>
@@ -106,17 +95,15 @@
             {% for compra in compras %}
                 <tr>
                     <td>{{ compra.comprador.nombre }}</td>
+                    <td>{{ compra.fecha_transaccion|date:"d/m/Y" }}</td>  
                     <td>
-                        {% for producto in compra.productos.all %}
-                            {{ producto.nombre }}{% if not forloop.last %}, {% endif %}
-                        {% endfor %}
-                    </td>
-                    <td>{{ compra.fecha_transaccion|date:"d/m/Y" }}</td>  <!-- Formato de la fecha -->
-                    <td>
-                        <!-- Ícono para ver detalles de la compra -->
-                        <a href="{% url 'tienda:detalle_compra' compra.id_compra %}" class="view-icon">
-                            <i class="fa-solid fa-eye"></i>
-                        </a>
+                        {% if compra.id_compra %}
+                            <a href="{% url 'tienda:vista_previa_factura' compra.id_compra %}" class="view-icon">
+                                <i class="fa-solid fa-eye"></i>
+                            </a>
+                        {% else %}
+                            <span>No disponible</span>
+                        {% endif %}
                     </td>  
                 </tr>
             {% empty %}

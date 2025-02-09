@@ -27,9 +27,22 @@ class ClienteForm(forms.ModelForm):
 class ComprasForm(forms.ModelForm):
     class Meta:
         model = Compras
-        fields = ['productos', 'comprador', 'precio_final']  
+        fields = ['comprador', 'fecha_transaccion', 'precio_final']
+        
         widgets = {
-            'productos': forms.SelectMultiple(attrs={'class': 'form-control'}),
             'comprador': forms.Select(attrs={'class': 'form-control'}),
-            'precio_final': forms.NumberInput(attrs={'class': 'form-control'}),
+            'fecha_transaccion': forms.DateInput(attrs={
+                'class': 'form-control',
+                'type': 'date',
+            }),
+            'precio_final': forms.NumberInput(attrs={
+                'class': 'form-control',
+                'readonly': True,  
+            }),
         }
+
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['precio_final'].required = False  
+

@@ -19,5 +19,7 @@ urlpatterns = [
     path("edit_cliente/<int:id_cliente>/", views.edit_cliente, name="edit_cliente"),
     path('clientes/eliminar/<int:id_cliente>/', views.delet_cliente, name='delet_cliente'),
     path("add_compra/", views.add_compra, name="add_compra"),
-    path('compra/<int:id_compra>/', views.detalle_compra, name='detalle_compra'),
+    path('factura/<int:id_compra>/', views.vista_previa_factura, name='vista_previa_factura'),
+    path('factura/<int:id_compra>/pdf/', views.generar_factura_pdf, name='generar_factura_pdf'),
+
 ]

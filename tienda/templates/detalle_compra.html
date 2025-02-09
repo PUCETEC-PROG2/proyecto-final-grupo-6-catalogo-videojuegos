@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+
+{% block title %}Detalles de la Compra{% endblock %}
+
+{% block content %}
+<style>
+    .table thead tr th,
+    .table tbody tr td {
+        color: white !important;
+    }
+
+    /* Asegurar que la tabla no cambie colores por Bootstrap */
+    .table-striped tbody tr:nth-of-type(odd) {
+        background-color: rgb(5, 110, 89, 0.60) !important; 
+    }
+
+    .table-striped tbody tr:nth-of-type(even) {
+        background-color: rgb(17, 97, 50, 0.60) !important; 
+    }
+</style>
+<div class="container mt-5" style="color:white">
+    <h2>Factura de Compra #{{ compra.id_compra }}</h2>
+    <h2><strong>Cliente:</strong> {{ compra.comprador }}</h2>
+    <h2><strong>Fecha:</strong> {{ compra.fecha_transaccion }}</h2>
+
+    <table class="table table-striped" style="color:white">
+        <thead>
+            <tr>
+                <th>Producto</th>
+                <th>Cantidad</th>
+                <th>Precio</th>
+                <th>Subtotal</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for detalle in detalles %}
+            <tr class="text-white">
+                <td>{{ detalle.producto.nombre_producto }}</td>
+                <td>{{ detalle.cantidad }}</td>
+                <td>${{ detalle.producto.precio }}</td>
+                <td>${{ detalle.producto.precio|floatformat:2 }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <h4>Total: ${{ total|floatformat:2 }}</h4>
+
+    <!-- Botón para descargar el PDF -->
+    <a href="{% url 'tienda:generar_factura_pdf' compra.id_compra %}" class="btn btn-primary">Descargar PDF</a>
+    <a href="{% url 'tienda:compras' %}" class="btn btn-secondary">Volver</a>
+</div>
+{% endblock %}
