@@ -77,11 +77,11 @@ WSGI_APPLICATION = 'Tienda_videojuegos.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'tienda_videojuegos',
-        'USER': 'ferari',
-        'PASSWORD': 'd123',
-        'HOST': 'localhost',
-        'PORT': '5432',
+        'NAME': 'tienda_de_videojuegos',
+        'USER': 'postgres',
+        'PASSWORD': '3451AA',
+        'HOST': 'localhost',  
+        'PORT': '5432',       
     }
 }
 
