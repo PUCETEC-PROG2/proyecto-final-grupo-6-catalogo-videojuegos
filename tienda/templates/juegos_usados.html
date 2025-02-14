@@ -5,36 +5,88 @@
 
 {% block content %}
 <style>
-    .card {
-      background-color:rgb(14, 52, 90); 
-      border: 0px solid #dee2e6; 
-      border-radius: 0.25rem; 
+  .card {
+    background-color: rgba(14, 52, 90, 0.8);
+    border: 0;
+    border-radius: 0.5rem;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s;
+  }
+
+  .card:hover {
+    transform: scale(1.05);
+  }
+
+  .card-img-top {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-top-left-radius: 0.5rem;
+    border-top-right-radius: 0.5rem;
+    transition: opacity 0.2s ease-in-out;
+  }
+
+  .card-img-top:hover {
+    opacity: 0.8;
+  }
+
+  .card-body {
+    padding: 1.5rem;
+    color: white;
+  }
+
+  .card-title {
+    font-size: 1.25rem;
+    font-weight: bold;
+  }
+
+  .card-text {
+    font-size: 1rem;
+    margin-bottom: 1rem;
+  }
+
+  h2 {
+    color: white;
+    margin-bottom: 2rem;
+    text-align: center; /* Centramos el texto */
+  }
+
+  .container {
+    margin-top: 4rem;
+  }
+
+  .row {
+    margin: 0;
+  }
+
+  .col-md-4 {
+    padding: 1rem;
   }
 </style>
-<h2 class="p-2" style="color:white; text-align: center;">Nuestra Seleccion de Juegos</h2>
+
+<h2 class="p-2">NUESTROS JUEGOS</h2>
 {% if productos %}
-    <div class="container mt-4">
-        <div class="row">
-            {% for producto in productos %}
-                <div class="col-md-4">
-                    <div class="card mb-4 shadow-sm">
-                        {% if producto.imagenes %}
-                            <img src="{{ producto.imagenes.url }}" class="card-img-top" alt="{{ producto.nombre_producto }}" style="height: 200px; object-fit: cover;">
-                        {% else %}
-                            <img src="{% static 'default_image.jpg' %}" class="card-img-top" alt="Imagen no disponible" style="height: 200px; object-fit: cover;">
-                        {% endif %}
-                        
-                        <div class="card-body" style="color:white">
-                            <h5 class="card-title">{{ producto.nombre_producto }}</h5>
-                            <p class="card-text"><strong>Precio: ${{ producto.precio }}</strong></p>
-                            <p class="card-text">{{ producto.descripcion|truncatechars:100 }}</p>
-                        </div>
-                    </div>
-                </div>
-            {% endfor %}
+  <div class="container mt-4">
+    <div class="row">
+      {% for producto in productos %}
+        <div class="col-md-4">
+          <div class="card mb-4 shadow-sm">
+            {% if producto.imagenes %}
+              <img src="{{ producto.imagenes.url }}" class="card-img-top" alt="{{ producto.nombre_producto }}">
+            {% else %}
+              <img src="{% static 'default_image.jpg' %}" class="card-img-top" alt="Imagen no disponible">
+            {% endif %}
+            <div class="card-body">
+              <h5 class="card-title">{{ producto.nombre_producto }}</h5>
+              <p class="card-text"><strong>Precio: ${{ producto.precio }}</strong></p>
+              <p class="card-text">{{ producto.descripcion|truncatechars:100 }}</p>
+            </div>
+          </div>
         </div>
+      {% endfor %}
     </div>
+  </div>
 {% else %}
-    <p style="color:white;">No hay productos disponibles en esta categoría.</p>
+  <p style="color:white;">No hay productos disponibles en esta categoría.</p>
 {% endif %}
 {% endblock %}

@@ -18,11 +18,11 @@
         body {
             width: 100%;
             height: 100%;
+            overflow: auto; /* Permitir desplazamiento */
         }
 
         body {
             background: #FF6153;
-            overflow: hidden;
         }
 
         .gradient {
@@ -137,17 +137,12 @@
             z-index: 1; /* Asegurarse de que la navbar esté en la capa superior */
         }
 
-        footer {
-            background-color: #4b0082; /* Color púrpura rico */
-            color: white;
-            text-align: center;
-            padding: 0.5em 0; /* Reduce el padding para hacerlo más delgado */
-            position: fixed;
-            bottom: 0;
-            width: 100%;
-            z-index: 1; /* Asegurarse de que el footer esté en la capa superior */
+        .center-image {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            height: 80px; /* Ajusta el tamaño según tu preferencia */
         }
-        
     </style>
 </head>
 <body>
@@ -158,11 +153,14 @@
                 <br>
                 <!-- Envolver el logo en un enlace -->
                 <a href="{% url 'tienda:index' %}">
-                    <img src="{% static "Logo_New.png" %}" alt="Logo" width="220" height="220">
+                    <img src="{% static "image.png" %}" alt="Logo" width="220" height="220">
                 </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
+
+                <!-- Imagen central -->
+                <img src="{% static 'ImageCenter.png' %}" class="center-image" alt="Central Image">
 
                 <div class="collapse navbar-collapse" id="navbarNav">
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
@@ -207,9 +205,6 @@
         </div>
     </nav>
     {% block content %}{% endblock content %}
-    <footer>
-        <p>Derechos Reservados © 2025</p>
-    </footer>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
