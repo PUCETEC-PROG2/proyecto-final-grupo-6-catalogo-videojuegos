@@ -6,10 +6,11 @@ from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from reportlab.lib.pagesizes import letter
 from reportlab.pdfgen import canvas
+from django.db import IntegrityError, InternalError
 
 
 from .models import Categoria,Cliente,Producto, Compras,DetalleCompra
-from tienda.forms import ClienteForm, ComprasForm
+from .forms import ClienteForm, ComprasForm
 
 # Create your views here.
 def index(request):
@@ -54,8 +55,17 @@ def add_cliente(request):
     if request.method == "POST":
         form = ClienteForm(request.POST, request.FILES)
         if form.is_valid():
-            form.save()
-            return redirect('tienda:clientes')
+            try:
+                form.save()
+                return redirect('tienda:clientes')
+            except IntegrityError as e:
+                error_message = str(e)
+                # Muestra el mensaje en pantalla usando messages
+                messages.error(request, f'Error de base de datos: {error_message}')
+            except InternalError as e:
+                error_message = str(e)
+                # Muestra el mensaje en pantalla usando messages
+                messages.error(request, f'Error de base de datos: {error_message}')
     else:
         form = ClienteForm()
 
@@ -67,8 +77,17 @@ def edit_cliente(request, id_cliente):
     if request.method == "POST":
         form = ClienteForm(request.POST, request.FILES, instance=cliente)
         if form.is_valid():
-            form.save()
-            return redirect('tienda:clientes')
+            try:
+                form.save()
+                return redirect('tienda:clientes')
+            except IntegrityError as e:
+                error_message = str(e)
+                # Muestra el mensaje en pantalla usando messages
+                messages.error(request, f'Error de base de datos: {error_message}')
+            except InternalError as e:
+                error_message = str(e)
+                # Muestra el mensaje en pantalla usando messages
+                messages.error(request, f'Error de base de datos: {error_message}')
     else:
         form = ClienteForm(instance=cliente)
 
